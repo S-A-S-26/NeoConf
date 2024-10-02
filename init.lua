@@ -190,6 +190,7 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<C-e>", ":!./autosetup.sh<CR>", { desc = "Auto Setup terminals as per script in file" })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -419,7 +420,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-			vim.keymap.set("n", "<leader>d", ":bdelete<CR>", { desc = "delete current buffer" })
+			vim.keymap.set("n", "<leader>d", ":bdelete!<CR>", { desc = "delete current buffer" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
@@ -1025,7 +1026,7 @@ require("lazy").setup({
 				"nvim-lualine/lualine.nvim",
 				dependencies = { "nvim-tree/nvim-web-devicons" },
 				config = function()
-					require("lualine").setup()
+					require("lualine").setup({})
 				end,
 			},
 		},
