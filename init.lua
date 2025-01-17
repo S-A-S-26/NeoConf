@@ -195,6 +195,8 @@ vim.keymap.set("n", "<C-e>", ":!./autosetup.sh<CR>", { desc = "Auto Setup termin
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+vim.g.lazyvim_eslint_auto_format = true
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
@@ -655,7 +657,7 @@ require("lazy").setup({
 				cssls = {},
 				-- tsserver = {},
 				--
-
+				eslint = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -968,6 +970,8 @@ require("lazy").setup({
 			},
 		},
 		{ "pocco81/auto-save.nvim" },
+		{ "jose-elias-alvarez/null-ls.nvim" },
+		{ "MunifTanjim/eslint.nvim" },
 		{
 			"kylechui/nvim-surround",
 			version = "*", -- Use for stability; omit to use `main` branch for the latest features
