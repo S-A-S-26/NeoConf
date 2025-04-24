@@ -164,7 +164,8 @@ vim.opt.scrolloff = 10
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.keymap.set("n", "<C-s>", ":w!<CR>")
+vim.keymap.set("v", "<leader>p", [["_dP]], { noremap = true, silent = true })
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
@@ -768,12 +769,12 @@ require("lazy").setup({
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
 					--    https://github.com/rafamadriz/friendly-snippets
-					-- {
-					--   'rafamadriz/friendly-snippets',
-					--   config = function()
-					--     require('luasnip.loaders.from_vscode').lazy_load()
-					--   end,
-					-- },
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 			},
 			"saadparwaiz1/cmp_luasnip",
@@ -969,9 +970,10 @@ require("lazy").setup({
 				-- options
 			},
 		},
-		{ "pocco81/auto-save.nvim" },
 		{ "jose-elias-alvarez/null-ls.nvim" },
 		{ "MunifTanjim/eslint.nvim" },
+		{ "mlaursen/vim-react-snippets" },
+		{ "jamestthompson3/sort-import.nvim" },
 		{
 			"kylechui/nvim-surround",
 			version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -1015,25 +1017,6 @@ require("lazy").setup({
 					hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 				end, { remap = true })
 			end,
-		},
-		{
-			"rmagatti/auto-session",
-			lazy = false,
-
-			---enables autocomplete for opts
-			---@module "auto-session"
-			---@type AutoSession.Config
-			opts = {
-				suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-				-- log_level = 'debug',
-			},
-			{
-				"nvim-lualine/lualine.nvim",
-				dependencies = { "nvim-tree/nvim-web-devicons" },
-				config = function()
-					require("lualine").setup({})
-				end,
-			},
 		},
 	},
 
