@@ -133,7 +133,13 @@ vim.opt.signcolumn = "yes"
 
 -- Decrease update time
 vim.opt.updatetime = 250
+vim.keymap.set('x', 'p', function()
+  return 'pgv"' .. vim.v.register .. 'y`>'
+end, { expr = true, noremap = true })
 
+vim.keymap.set('x', 'P', function()
+  return 'Pgv"' .. vim.v.register .. 'y`>'
+end, { expr = true, noremap = true })
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
@@ -722,22 +728,22 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
-				else
-					lsp_format_opt = "fallback"
-				end
-				return {
-					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
-				}
-			end,
+			-- format_on_save = function(bufnr)
+			-- 	-- Disable "format_on_save lsp_fallback" for languages that don't
+			-- 	-- have a well standardized coding style. You can add additional
+			-- 	-- languages here or re-enable it for the disabled ones.
+			-- 	local disable_filetypes = { c = true, cpp = true }
+			-- 	local lsp_format_opt
+			-- 	if disable_filetypes[vim.bo[bufnr].filetype] then
+			-- 		lsp_format_opt = "never"
+			-- 	else
+			-- 		lsp_format_opt = "fallback"
+			-- 	end
+			-- 	return {
+			-- 		timeout_ms = 500,
+			-- 		lsp_format = lsp_format_opt,
+			-- 	}
+			-- end,
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
@@ -974,6 +980,7 @@ require("lazy").setup({
 		{ "MunifTanjim/eslint.nvim" },
 		{ "mlaursen/vim-react-snippets" },
 		{ "jamestthompson3/sort-import.nvim" },
+		{ "folke/trouble.nvim" },
 		{
 			"kylechui/nvim-surround",
 			version = "*", -- Use for stability; omit to use `main` branch for the latest features
